@@ -62,6 +62,11 @@ def getConvResponse():
     convText = request.form.get('convText')
     convContext = request.form.get('context', "{}")
     jsonContext = json.loads(convContext)
+    #fix
+    if convText is not None:
+        convText = convText.replace("\t", "").replace("\n", "").replace("\r", "")
+    else:
+        convText = ""
 
     response = assistant.message(workspace_id=workspace_id,
                                  input={'text': convText},
